@@ -17,14 +17,14 @@ Django| The first laboratory. News. 10-th option
 #'     }
 #' }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_lab1_var10',
-        'USER': 'root',
-        'PASSWORD': 'root',
-    }
+'default': {
+'ENGINE': 'django.db.backends.mysql',
+'NAME': 'django_lab1_var10',
+'USER': 'root',
+'PASSWORD': 'root',
 }
-3. Выдели их и вставь место них это:
+}
+3. Выдели их и вставь вместо них это:
  DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.sqlite3',
