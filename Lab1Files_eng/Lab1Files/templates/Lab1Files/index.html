@@ -1,0 +1,80 @@
+{% extends 'Lab1Files/base.html' %}
+
+{% block content %}
+    
+    <div class='my-5'>
+        <form method="GET" name='search'>
+            <div class="active-cyan-4 mb-4 my-2">
+                <input {% if search_key_word %}value='{{ search_key_word }}'{% endif %} name='key-word' class="form-control" type="text" placeholder="Поиск по ключевым словам..." aria-label="Search">
+            </div>
+            <button type="success" class="btn btn-primary">Поиск</button>
+        </form>
+
+        <!-- {% if files %}
+            {% if search_key_word %}
+                <p class='my-4'>Вот что удалось найти:</p>
+            {% else %}
+                <p class='my-4'>Все файлы:</p>
+            {% endif %}
+            
+            {% for f in files %}
+                <div class="card my-4">
+                    <div class="card-header">{{ f.description }}</div>
+                    <div class="card-body">{{ f.file_field }}</div>
+                    <div class="card-footer">Footer</div> 
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class='my-4'>Ничего не найдено :(</p>
+        {% endif %} -->
+
+        {% if files %}
+        
+            {% if search_key_word %}
+                <p class='my-4'>Вот что удалось найти:</p>
+            {% else %}
+                <p class='my-4'>Все файлы:</p>
+            {% endif %}
+            <div class="card-deck">
+                {% for f in files %}
+                <div class="card bg-light">
+                    <div class="card-body text-center">
+                        <h5>{{ f.description }}</h5>
+                        <hr>
+                    <p class="card-text">
+                        <a href="{{ f.file_field.url }}" download>
+                            <button class='my-3 btn btn-lg btn-block' onclick="add_download('{{ f.id }}');">
+                                Скачать<br>{{ f.file_field }}
+                            </button>
+                        </a>
+                    </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class='my-4'>Ничего не найдено :(</p>
+        {% endif %}     
+    </div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    function add_download(id){
+        $.ajax({
+            type: 'GET',
+            async: true,
+            url: '/ajax/add-download/',
+            data: {
+                'id' : id,
+            },
+            error: function(data) {
+                alert('Some error with ajax request.');
+            },
+            dataType: 'json',
+            });
+    };
+</script>
+
+{% endblock %}

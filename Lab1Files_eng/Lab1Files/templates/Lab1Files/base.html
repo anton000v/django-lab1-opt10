@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <!-- <nav class="navbar navbar-expand-lg navbar-light" style="background-color:aquamarine;">
+            <a class="navbar-brand" href="/">Вариант 10</a>
+                 <a class="nav-item nav-link" href="{% url 'admin-statistics' %}">Статистика скачиваний</a> 
+                 <a href="admin/FilesApp/file/add/">Добавить файл</a>
+                 <a href="admin/logout">Выйти</a>
+          </nav> -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Variant 10 </a>
+            {% if user.is_superuser %}
+            Привет, админ!
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{% url 'admin-statistics' %}">Статистика</a>
+                <a class="nav-item nav-link" href="admin/Lab1Files/file/add/">Добавить файл</a>
+                <a class="nav-item nav-link" href="admin/logout">Выйти</a>
+              </div>
+            </div>
+            {% endif %}
+          </nav>
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    {% block js %}
+    {% endblock %}
+</body>
+</html>
